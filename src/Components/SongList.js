@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import NewSongForm from "./NewSongForm";
 
 const SongList = () => {
   //array of objects
@@ -12,10 +13,10 @@ const SongList = () => {
     { title: "No way home", id: 5 },
   ]);
 
-  const addSongHandler = () => {
+  const addSongHandler = (title) => {
     //spread operator(...songs) to copy/extend all the data from state
     //uuid create unique id for every element
-    setSongs([...songs, { title: "Sixth title song", id: uuidv4() }]);
+    setSongs([...songs, { title: title, id: uuidv4() }]);
   };
 
   console.log(songs);
@@ -27,7 +28,7 @@ const SongList = () => {
           return <li key={song.id}>{song.title}</li>;
         })}
       </ul>
-      <button onClick={addSongHandler}>Add Song</button>
+      <NewSongForm addSong={addSongHandler} />
     </div>
   );
 };
