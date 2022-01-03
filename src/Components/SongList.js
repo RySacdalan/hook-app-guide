@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import NewSongForm from "./NewSongForm";
 
@@ -12,6 +12,7 @@ const SongList = () => {
     { title: "Far from home", id: 4 },
     { title: "No way home", id: 5 },
   ]);
+  const [age, setAge] = useState(20);
 
   const addSongHandler = (title) => {
     //spread operator(...songs) to copy/extend all the data from state
@@ -19,7 +20,9 @@ const SongList = () => {
     setSongs([...songs, { title: title, id: uuidv4() }]);
   };
 
-  console.log(songs);
+  useEffect(() => {
+    console.log("useEffect Run!");
+  }, [age]);
 
   return (
     <div className="song-list">
@@ -29,6 +32,7 @@ const SongList = () => {
         })}
       </ul>
       <NewSongForm addSong={addSongHandler} />
+      <div onClick={() => setAge(age + 1)}>Add age: {age}</div>
     </div>
   );
 };
